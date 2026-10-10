@@ -1,0 +1,21 @@
+@use "sass:map";
+$fonts: (
+  'weights': (
+    'light': 400,
+    'medium': 500,
+    'bold': 700,
+  ),
+  'sizes': (
+    'small': 0.95rem,
+    'base': 1rem,
+    'header-1': 2.75rem,
+    'header-2': 1.5rem,
+  ),
+);
+
+@function setWeight($weight){
+  @return map.get($fonts, 'weights', $weight)
+};
+@function setSize($size){
+  @return map.get($fonts, 'sizes', $size)
+};
