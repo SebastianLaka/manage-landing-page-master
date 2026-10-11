@@ -1,11 +1,14 @@
 <script setup lang="ts">
-import HeaderSite from './components/Header/HeaderSite.vue';
+import NavigationSite from '@/components/NavSite/NavigationSite.vue';
 </script>
 
 <template>
-    <HeaderSite />
+    <NavigationSite />
 </template>
 
 <style lang="scss">
 @use "@/assets/scss/reset.scss" as *;
+body{
+    font-family: 'Be Vietnam Pro', sans-serif;
+}
 </style>
