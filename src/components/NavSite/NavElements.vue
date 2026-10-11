@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { useCounterStore } from '@/stores/counter.ts'
+const store = useCounterStore()
 interface Items {
   id: number
   title: string
@@ -8,7 +10,7 @@ const props = defineProps<{
 }>()
 </script>
 <template>
-  <ul class="nav-items-container">
+  <ul class="nav-items-container" :class="{ 'is-open': !store.isMenuOpen }">
     <li v-for="item in navItems" :key="item.id" class="nav-item">{{ item.title }}</li>
   </ul>
 </template>
@@ -17,19 +19,22 @@ const props = defineProps<{
 @use '@/assets/scss/fonts.scss' as *;
 @media (min-width: $mobile-view) {
   .nav-items-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    display: none;
     padding: 2em;
-    gap: 2em;
-    border-radius: .4em;
+    gap: 1.5em;
+    border-radius: 0.4em;
     font-weight: setWeight('medium');
     position: absolute;
     left: 5%;
     right: 5%;
     top: 125%;
     z-index: 10;
+    &.is-open {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
   }
 }
 

@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
+import { useCounterStore } from '@/stores/counter.ts'
 import LogoImage from '@/components/icons/logo.svg'
 import Logo from '@/components/ReuseableComponents/Logo.vue'
 import IconHamburger from '@/components/icons/icon-hamburger.svg'
 import IconClose from '@/components/icons/icon-close.svg'
 import NavElements from './NavElements.vue'
+const store = useCounterStore();
 const logoData = {
   img: LogoImage,
   alt: 'Logo in navigation for site manage lading page master',
@@ -32,38 +34,17 @@ const navItems = ref([
   },
 ])
 
-const isMobile = ref<boolean>(true);
-
-const toggleIcon = () => {
-  isMobile.value = !isMobile.value
-}
-const viewMenu = () => {
-  const width = window.innerWidth < 992;
-  if(width){
-    isMobile.value = true
-  }else{
-    isMobile.value = false
-  }
-}
-
-onMounted(()=> {
-  viewMenu();
-  window.addEventListener('resize', viewMenu);
-})
-onUnmounted(()=> {
-  window.addEventListener('resize', viewMenu);
-})
 </script>
 <template>
   <nav class="nav-site">
     <div class="logo-box">
       <Logo :src="logoData.img" :alt="logoData.alt" class="logo-box__logo" />
     </div>
-    <NavElements :nav-items="navItems" v-if="!isMobile"/>
+    <NavElements :nav-items="navItems" />
     <button class="nav-site__desktop-cta">Get Started</button>
-    <button @click="toggleIcon" class="nav-site__mobile-nav-button">
+    <button @click="store.toggleIcon" class="nav-site__mobile-nav-button">
       <img
-        :src="isMobile ? IconHamburger : IconClose"
+        :src="store.isMenuOpen ? IconHamburger : IconClose"
         alt="Mobile menu for toggle with site navigation"
       />
     </button>
