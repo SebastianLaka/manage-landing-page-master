@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import LogoImage from '@/components/icons/logo.svg'
 import Logo from '@/components/ReuseableComponents/Logo.vue'
 import IconHamburger from '@/components/icons/icon-hamburger.svg'
@@ -8,10 +8,6 @@ import NavElements from './NavElements.vue'
 const logoData = {
   img: LogoImage,
   alt: 'Logo in navigation for site manage lading page master',
-}
-const isMobile = ref<boolean>(true)
-const toggleIcon = () => {
-  isMobile.value = !isMobile.value
 }
 const navItems = ref([
   {
@@ -35,14 +31,35 @@ const navItems = ref([
     title: 'Community',
   },
 ])
+
+const isMobile = ref<boolean>(true);
+
+const toggleIcon = () => {
+  isMobile.value = !isMobile.value
+}
+const viewMenu = () => {
+  const width = window.innerWidth < 992;
+  if(width){
+    isMobile.value = true
+  }else{
+    isMobile.value = false
+  }
+}
+
+onMounted(()=> {
+  viewMenu();
+  window.addEventListener('resize', viewMenu);
+})
+onUnmounted(()=> {
+  window.addEventListener('resize', viewMenu);
+})
 </script>
 <template>
   <nav class="nav-site">
     <div class="logo-box">
       <Logo :src="logoData.img" :alt="logoData.alt" class="logo-box__logo" />
     </div>
-
-    <NavElements :nav-items="navItems" />
+    <NavElements :nav-items="navItems" v-if="!isMobile"/>
     <button class="nav-site__desktop-cta">Get Started</button>
     <button @click="toggleIcon" class="nav-site__mobile-nav-button">
       <img
@@ -61,6 +78,8 @@ const navItems = ref([
   justify-content: space-between;
   align-items: center;
   padding: 1em;
+  position: relative;
+  z-index: 0;
   .logo-box {
     display: flex;
     justify-content: center;
