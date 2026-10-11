@@ -17,11 +17,12 @@ const props = defineProps<{
 <style lang="scss" scoped>
 @use '@/assets/scss/breakpoints.scss' as *;
 @use '@/assets/scss/fonts.scss' as *;
+@use '@/assets/scss/mixins.scss' as *;
 @media (min-width: $mobile-view) {
   .nav-items-container {
     display: none;
     padding: 2em;
-    gap: 1.5em;
+    @include set-gap(0, 1.5em);
     border-radius: 0.4em;
     font-weight: setWeight('medium');
     position: absolute;
@@ -30,21 +31,15 @@ const props = defineProps<{
     top: 125%;
     z-index: 10;
     &.is-open {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      @include flex-layout($flex-direction: column, $justify-content: center, $align-items: center);
     }
   }
 }
 
 @media (min-width: $desktop-small) {
   .nav-items-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: row;
-    gap: 0 1em;
+    @include flex-layout($flex-direction: row, $justify-content: space-between, $align-items: center);
+    @include set-gap(1.25em, 0);
     position: static;
     .nav-item {
       padding: 0.25em;

@@ -1,0 +1,10 @@
+@mixin flex-layout($flex-direction: null, $justify-content: null, $align-items: null) {
+  display: flex;
+  flex-direction: $flex-direction;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}
+@mixin set-gap($column: null, $row: null) {
+  column-gap: $column;
+row-gap: $row;
+}

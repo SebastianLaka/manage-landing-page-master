@@ -54,22 +54,17 @@ const navItems = ref([
 @use '@/assets/scss/fonts.scss' as *;
 @use '@/assets/scss/colors.scss' as *;
 @use '@/assets/scss/breakpoints.scss' as *;
+@use '@/assets/scss/mixins.scss' as *;
 .nav-site {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  @include flex-layout($justify-content: space-between, $align-items: center);
   padding: 1em;
   position: relative;
   z-index: 0;
   .logo-box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include flex-layout($justify-content: center, $align-items: center);
   }
   &__mobile-nav-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include flex-layout($justify-content: center, $align-items: center);
     padding: 0.5em;
     width: 2.5em;
     height: 2.5em;
