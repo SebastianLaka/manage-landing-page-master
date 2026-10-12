@@ -25,7 +25,7 @@ const featuresItems = [
 ]
 </script>
 <template>
-  <section class="features-container">
+  <section class="features-container wrapper">
     <div class="features-content">
       <h2 class="features-content__header">What's different about Manage?</h2>
       <p class="features-content__description">
@@ -33,12 +33,18 @@ const featuresItems = [
         is tailor-made for modern digital product teams.
       </p>
     </div>
-    <FeaturesItems :feature-items="featuresItems"/>
+    <FeaturesItems :feature-items="featuresItems" />
   </section>
 </template>
 <style lang="scss" scoped>
 @use '@/assets/scss/mixins.scss' as *;
 @use '@/assets/scss/fonts.scss' as *;
+@use '@/assets/scss/breakpoints.scss' as *;
+.wrapper {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 81.25em;
+}
 .features-container {
   padding: 0 1em;
   .features-content {
@@ -48,6 +54,28 @@ const featuresItems = [
     &__header {
       font-size: setSize('header-2');
       font-weight: setWeight('bold');
+      max-width: 30ch;
+    }
+    &__description{
+        max-width: 45ch;
+    }
+  }
+}
+@media (min-width: $desktop-small) {
+  .features-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: start;
+    @include set-gap(3em, 0);
+    .features-content {
+      align-items: start;
+      text-align: start;
+      &__header {
+        max-width: 20ch;
+      }
+      &__description{
+        max-width: 30ch;
+      }
     }
   }
 }

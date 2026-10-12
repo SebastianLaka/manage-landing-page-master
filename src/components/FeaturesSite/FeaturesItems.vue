@@ -24,6 +24,7 @@ const props = defineProps<{
 @use '@/assets/scss/mixins.scss' as *;
 @use '@/assets/scss/fonts.scss' as *;
 @use '@/assets/scss/colors.scss' as *;
+@use '@/assets/scss/breakpoints.scss' as *;
 .features {
   @include flex-layout($flex-direction: column);
   @include set-gap(0, 3em);
@@ -34,14 +35,27 @@ const props = defineProps<{
     .feature-card-header {
       @include flex-layout($align-items: center);
       @include set-gap(1em, 0);
-      &__number{
+      &__number {
         background-color: setColor('orange-400');
         color: setColor('gray-50');
-        padding: .5em 1.5em;
+        padding: 0.5em 1.5em;
         border-radius: 4em;
       }
-      &__title{
+      &__title {
         font-size: setSize('base');
+      }
+    }
+    &__description {
+      max-width: 65ch;
+    }
+  }
+}
+@media (min-width: $desktop-small) {
+  .features {
+    padding: 0;
+    .feature-card {
+      &__description {
+        max-width: 42ch;
       }
     }
   }
