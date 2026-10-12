@@ -11,13 +11,14 @@ const props = defineProps<{
 </script>
 <template>
   <ul class="nav-items-container" :class="{ 'is-open': !store.isMenuOpen }">
-    <li v-for="item in navItems" :key="item.id" class="nav-item">{{ item.title }}</li>
+    <li v-for="item in navItems" :key="item.id" class="nav-items-container__nav-item">{{ item.title }}</li>
   </ul>
 </template>
 <style lang="scss" scoped>
 @use '@/assets/scss/breakpoints.scss' as *;
 @use '@/assets/scss/fonts.scss' as *;
 @use '@/assets/scss/mixins.scss' as *;
+@use '@/assets/scss/colors.scss' as *;
 @media (min-width: $mobile-view) {
   .nav-items-container {
     display: none;
@@ -33,17 +34,31 @@ const props = defineProps<{
     &.is-open {
       @include flex-layout($flex-direction: column, $justify-content: center, $align-items: center);
     }
+    &__nav-item {
+      padding: 0.25em;
+      cursor: pointer;
+      transition: color .3s ease-in-out;
+      &:hover{
+        color: setColor('gray-500');
+      }
+    }
   }
 }
 
 @media (min-width: $desktop-small) {
   .nav-items-container {
-    @include flex-layout($flex-direction: row, $justify-content: space-between, $align-items: center);
+    @include flex-layout(
+      $flex-direction: row,
+      $justify-content: space-between,
+      $align-items: center
+    );
     @include set-gap(1.25em, 0);
     position: static;
-    .nav-item {
-      padding: 0.25em;
-      cursor: pointer;
+    &__nav-item {
+      transition: color .3s ease-in-out;
+      &:hover{
+        color: setColor('gray-500');
+      }
     }
   }
 }

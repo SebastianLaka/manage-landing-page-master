@@ -1,3 +1,4 @@
+@use './colors.scss' as *;
 *,
 *::before,
 *::after {
@@ -9,11 +10,25 @@ button {
   border: none;
   cursor: pointer;
   font-family: inherit;
+  font-size: inherit;
 }
-img{
+img {
   width: 100%;
   display: block;
 }
 li {
   list-style-type: none;
+  color: setColor('blue-950');
+}
+p {
+  line-height: 150%;
+  color: setColor('gray-500');
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: setColor('blue-950');
 }

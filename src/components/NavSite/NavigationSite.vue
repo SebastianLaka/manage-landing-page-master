@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref} from 'vue'
 import { useCounterStore } from '@/stores/counter.ts'
 import LogoImage from '@/components/icons/logo.svg'
 import Logo from '@/components/ReuseableComponents/Logo.vue'
 import IconHamburger from '@/components/icons/icon-hamburger.svg'
 import IconClose from '@/components/icons/icon-close.svg'
 import NavElements from './NavElements.vue'
+import NavButton from '@/components/ReuseableComponents/ButtonSite.vue'
 const store = useCounterStore();
 const logoData = {
   img: LogoImage,
@@ -36,18 +37,18 @@ const navItems = ref([
 
 </script>
 <template>
-  <nav class="nav-site">
+  <nav class="nav-site wrapper">
     <div class="logo-box">
       <Logo :src="logoData.img" :alt="logoData.alt" class="logo-box__logo" />
     </div>
     <NavElements :nav-items="navItems" />
-    <button class="nav-site__desktop-cta">Get Started</button>
-    <button @click="store.toggleIcon" class="nav-site__mobile-nav-button">
+    <NavButton class="nav-site__desktop-cta">Get Started</NavButton>
+    <NavButton @click="store.toggleIcon" class="nav-site__mobile-nav-button">
       <img
         :src="store.isMenuOpen ? IconHamburger : IconClose"
         alt="Mobile menu for toggle with site navigation"
       />
-    </button>
+    </NavButton>
   </nav>
 </template>
 <style scoped lang="scss">
@@ -55,6 +56,11 @@ const navItems = ref([
 @use '@/assets/scss/colors.scss' as *;
 @use '@/assets/scss/breakpoints.scss' as *;
 @use '@/assets/scss/mixins.scss' as *;
+.wrapper{
+  margin: 0 auto;
+  width: 100%;
+  max-width: 81.25em;
+}
 .nav-site {
   @include flex-layout($justify-content: space-between, $align-items: center);
   padding: 1em;
@@ -81,9 +87,10 @@ const navItems = ref([
     }
     &__desktop-cta {
       display: block;
-      font-size: setSize('base');
-      padding: 0.25em 0.75em;
-      background-color: transparent;
+      transition: background-color .3s ease-in-out;
+      &:hover{
+        background-color: hsl(12, 97%, 75%);
+      }
     }
   }
 }
