@@ -1,9 +1,9 @@
 <script lang="ts" setup>
+import type { ImageProps } from '@/Types/Types';
 const props = defineProps<{
-    src: string,
-    alt: string,
+    imageItem: ImageProps
 }>();
 </script>
 <template>
-    <img :src="props.src" :alt="props.alt">
+    <img :src="props.imageItem.src" :alt="props.imageItem.alt">
 </template>

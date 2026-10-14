@@ -1,16 +1,18 @@
 <script lang="ts" setup>
+import { ref } from 'vue';
 import Image from '../ReuseableComponents/Image.vue'
 import HeroImage from '@/components/icons/illustration-intro.svg'
 import HeroButton from '@/components/ReuseableComponents/ButtonSite.vue'
-const heroImageData = {
+import type { ImageProps } from '@/Types/Types.ts';
+const heroImageData = ref<ImageProps>({
   src: HeroImage,
   alt: 'Hero image with charts and increase products price',
-}
+})
 </script>
 <template>
   <section class="header wrapper">
     <div class="logo-box">
-      <Image :src="heroImageData.src" :alt="heroImageData.alt" />
+      <Image :src="heroImageData.src" :alt="heroImageData.alt" :image-item="heroImageData"/>
     </div>
 
     <div class="content">
