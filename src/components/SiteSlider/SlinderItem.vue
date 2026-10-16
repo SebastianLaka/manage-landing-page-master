@@ -20,9 +20,14 @@ const props = defineProps<{
 </template>
 <style lang="scss" scoped>
 @use '@/assets/scss/mixins.scss' as *;
+@use '@/assets/scss/breakpoints' as *;
 .slider-item {
   @include flex-layout($flex-direction: column, $justify-content: center, $align-items: center);
-  @include set-gap(0, 1em);
+  @include set-gap(1em, 1em);
   text-align: center;
+  &__description {
+    max-width: 30ch;
+  }
 }
+
 </style>

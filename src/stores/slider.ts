@@ -1,12 +1,11 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import type { SliderItem } from '@/Types/Types'
-
-
 import AvatarAnisha from '@/assets/images/avatar-anisha.png'
 import AvatarAli from '@/assets/images/avatar-ali.png'
 import AvatarRichard from '@/assets/images/avatar-richard.png'
 import AvatarShanai from '@/assets/images/avatar-shanai.png'
+
 export const useSliderStore = defineStore('slider', () => {
   const sliderItems = ref<SliderItem[]>([
     {
@@ -52,7 +51,32 @@ export const useSliderStore = defineStore('slider', () => {
         ' “Their software allows us to track, manage and collaborate on our projects from anywhere. It keeps the whole team in-sync without being intrusive.”',
     },
   ])
+
+  const currentCarousellItem = ref(0)
+  const carousellItemsCount = computed(() => sliderItems.value.length)
+
+  const slidePrev = () => {
+    if (currentCarousellItem.value > 0) {
+      currentCarousellItem.value--
+    } else {
+      currentCarousellItem.value = carousellItemsCount.value - 1
+    }
+  }
+  const slideNext = () => {
+    if (currentCarousellItem.value < carousellItemsCount.value - 1) {
+      currentCarousellItem.value++
+    } else {
+      currentCarousellItem.value = 0
+    }
+  }
+  const setSlide = (index: number) => {
+    currentCarousellItem.value = index
+  }
   return {
-    sliderItems
+    sliderItems,
+    currentCarousellItem,
+    slidePrev,
+    slideNext,
+    setSlide,
   }
 })
