@@ -3,7 +3,7 @@ import NavigationSite from '@/components/NavSite/NavigationSite.vue'
 import HeaderSite from './components/HeaderSite/HeaderSite.vue'
 import FeaturesMain from './components/FeaturesSite/FeaturesMain.vue'
 import SiteReviews from './components/SiteSlider/SiteReviews.vue';
-
+import BannerSite from './components/BannerSite/BannerSite.vue';
 </script>
 
 <template>
@@ -12,6 +12,7 @@ import SiteReviews from './components/SiteSlider/SiteReviews.vue';
     <HeaderSite />
     <FeaturesMain />
     <SiteReviews />
+    <BannerSite />
   </main>
 </template>
 
