@@ -67,6 +67,8 @@ const logoData = {
   img: LogoImage,
   alt: 'Logo in navigation for site manage lading page master',
 }
+import { useValidationStore } from '@/stores/validation.ts'
+const validateMail = useValidationStore();
 </script>
 <template>
   <footer class="footer">
@@ -74,7 +76,7 @@ const logoData = {
       <div class="validation-zone">
         <div class="actions">
           <FooterEmail />
-          <FooterButton class="actions__cta">Get Started</FooterButton>
+          <FooterButton class="actions__cta" type="submit" @click="validateMail.validation">Go</FooterButton>
         </div>
 
         <div class="disclaimers-zone">
@@ -109,7 +111,7 @@ const logoData = {
     @include set-gap(2em, 3em);
     .validation-zone {
       .actions {
-        @include flex-layout($justify-content: center, $align-items: center);
+        @include flex-layout($justify-content: center, $align-items: start);
         @include set-gap(1em, 0);
         &__cta {
           box-shadow: none;
