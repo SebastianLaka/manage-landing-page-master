@@ -52,9 +52,9 @@ export const useSliderStore = defineStore('slider', () => {
     },
   ])
 
-  const currentCarousellItem = ref(0)
+  const currentCarousellItem = ref(1)
   const carousellItemsCount = computed(() => sliderItems.value.length)
-
+ 
   const slidePrev = () => {
     if (currentCarousellItem.value > 0) {
       currentCarousellItem.value--

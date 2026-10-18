@@ -1,16 +1,26 @@
 <script setup lang="ts">
-import SlinderItem from './SlinderItem.vue'
+import SliderItem from './SlinderItem.vue'
 import { useSliderStore } from '@/stores/slider.ts'
 const slider = useSliderStore()
+
+const handleDotClick = (index: number) => {
+  slider.setSlide(index)
+}
 </script>
 <template>
   <div class="reviews-container">
     <div class="slider-items-container">
-      <SlinderItem :review-items="slider.sliderItems" />
+      <SliderItem :review-items="slider.sliderItems"/>
     </div>
   </div>
   <div class="carousel-dots">
-    <button v-for="(_, index) in slider.sliderItems" :key="index" class="carousel-dot"></button>
+    <button
+      v-for="(_, index) in slider.sliderItems"
+      :key="index"
+      class="carousel-dot"
+      :class="{ 'is-active': slider.currentCarousellItem === index }"
+      @click="handleDotClick(index)"
+    ></button>
   </div>
 </template>
 <style lang="scss" scoped>
@@ -21,20 +31,19 @@ const slider = useSliderStore()
   .slider-items-container {
     @include flex-layout($justify-content: space-between, $align-items: center);
     @include set-gap(0, 2em);
+    width: 100vw;
   }
 }
-
-@media (min-width: $mobile-view) {
+@media (min-width: $mobile-view) and (max-width: $desktop-small){
   .reviews-container {
-    width: 300%;
     .slider-items-container {
-      transform: translateX(15%);
+      @include flex-layout($justify-content: center, $align-items: start);
+      @include set-gap(2em, 0);
+      position: relative;
+      height: 30svh;
     }
   }
   .carousel-dots {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     @include flex-layout();
     @include set-gap(1em, 0);
     .carousel-dot {
@@ -43,25 +52,9 @@ const slider = useSliderStore()
       border: 0.1em solid setColor('orange-400');
       width: 0.75em;
       height: 0.75em;
-    }
-  }
-}
-@media (min-width: $desktop-small) {
-  .reviews-container {
-    width: 170%;
-    .slider-items-container {
-      transform: translateX(0);
-    }
-  }
-  .carousel-dots{
-    display: none;
-  }
-}
-@media (min-width: $desktop-wide) {
-  .reviews-container {
-    width: 140%;
-    .slider-items-container {
-      transform: translateX(0%);
+      &.is-active {
+        background-color: setColor('orange-400');
+      }
     }
   }
 }
