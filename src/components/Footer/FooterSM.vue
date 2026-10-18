@@ -12,6 +12,7 @@ const props = defineProps<{
 <style lang="scss" scoped>
 @use '@/assets/scss/colors.scss' as *;
 @use '@/assets/scss/mixins.scss' as *;
+@use '@/assets/scss/breakpoints.scss' as *;
 .social-media-zone {
   @include flex-layout($justify-content: space-between);
   @include set-gap(1em, 0);
@@ -19,5 +20,13 @@ const props = defineProps<{
     width: 2.75em;
     height: 2.75em;
   }
+}
+@media (min-width: $desktop-small){
+    .social-media-zone{
+        &__icon{
+            width: 2em;
+            height: 2em;
+        }
+    }
 }
 </style>

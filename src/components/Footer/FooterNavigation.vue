@@ -32,4 +32,10 @@ const props = defineProps<{
     }
   }
 }
+@media (min-width: $desktop-wide) {
+ .footer-items {
+  padding-right: 1em;
+    @include set-gap(10em, 1em);
+  }
+}
 </style>

@@ -70,10 +70,16 @@ const logoData = {
 </script>
 <template>
   <footer class="footer">
-    <div class="footer-content">
+    <div class="footer-content wrapper">
       <div class="validation-zone">
-        <FooterEmail />
-        <FooterButton class="validation-zone__cta">Get Started</FooterButton>
+        <div class="actions">
+          <FooterEmail />
+          <FooterButton class="actions__cta">Get Started</FooterButton>
+        </div>
+
+        <div class="disclaimers-zone">
+          <p class="disclaimers-zone__description">Copyright 2020. All rights reserved.</p>
+        </div>
       </div>
       <div class="footer-navigation-container">
         <FooterNavigation :footer-items="footerItems" />
@@ -81,7 +87,7 @@ const logoData = {
       <div class="social-media-container">
         <FooterSM :icons="footerSocialMedia" />
         <Logo :src="logoData.img" :alt="logoData.alt" />
-        <p>Copyright 2020. All rights reserved.</p>
+        <p class="social-media-container__description">Copyright 2020. All rights reserved.</p>
       </div>
     </div>
   </footer>
@@ -90,6 +96,11 @@ const logoData = {
 @use '@/assets/scss/mixins.scss' as *;
 @use '@/assets/scss/colors.scss' as *;
 @use '@/assets/scss/breakpoints.scss' as *;
+.wrapper {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 81.25em;
+}
 .footer {
   background-color: setColor('blue-950');
   padding: 2em 1em;
@@ -97,37 +108,64 @@ const logoData = {
     @include flex-layout($flex-direction: column);
     @include set-gap(2em, 3em);
     .validation-zone {
-      @include flex-layout($justify-content: center, $align-items: center);
-      @include set-gap(1em, 0);
-      &__cta {
-        box-shadow: none;
+      .actions {
+        @include flex-layout($justify-content: center, $align-items: center);
+        @include set-gap(1em, 0);
+        &__cta {
+          box-shadow: none;
+        }
+      }
+      .description-zone {
+        display: none;
       }
     }
     .footer-navigation-container {
       @include flex-layout($justify-content: center);
     }
-    .social-media-container{
+    .social-media-container {
       @include flex-layout($flex-direction: column, $justify-content: center, $align-items: center);
       @include set-gap(0, 3em);
     }
   }
 }
-@media (min-width: $mobile-view){
-  .footer{
-    .footer-content{
-      .validation-zone{
+@media (min-width: $mobile-view) {
+  .footer {
+    .footer-content {
+      .validation-zone {
         flex-direction: column;
         @include set-gap(0, 1em);
       }
     }
   }
 }
-@media (min-width: 30em){
-  .footer{
-    .footer-content{
-      .validation-zone{
+@media (min-width: 30em) {
+  .footer {
+    .footer-content {
+      .validation-zone {
         flex-direction: row;
         @include set-gap(1em, 0);
+      }
+    }
+  }
+}
+
+@media (min-width: $desktop-wide) {
+  .footer {
+    padding: 4em 1em;
+    .footer-content {
+      @include flex-layout($flex-direction: row-reverse, $justify-content: space-between);
+      .validation-zone {
+        @include flex-layout($flex-direction: column, $justify-content: space-between);
+        .disclaimers-zone {
+          display: block;
+          text-align: right;
+        }
+      }
+      .social-media-container {
+        justify-content: space-between;
+        &__description {
+          display: none;
+        }
       }
     }
   }
