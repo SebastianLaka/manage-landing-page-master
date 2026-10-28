@@ -5,12 +5,13 @@ import FooterButton from '../ReuseableComponents/ButtonSite.vue'
 import FooterNavigation from './FooterNavigation.vue'
 import FooterSM from './FooterSM.vue'
 import Logo from '../ReuseableComponents/Logo.vue'
-import LogoImage from '@/components/icons/logo.svg'
 import FacebookIcon from '../icons/icon-facebook.svg'
 import YoutubekIcon from '../icons/icon-youtube.svg'
 import TwitterIcon from '../icons/icon-twitter.svg'
 import PrinterestIcon from '../icons/icon-pinterest.svg'
 import InstagramIcon from '../icons/icon-instagram.svg'
+const isWhite = ref(true)
+
 const footerItems = ref([
   {
     id: 1,
@@ -63,12 +64,8 @@ const footerSocialMedia = ref([
     alt: 'Footer icon instagram',
   },
 ])
-const logoData = {
-  img: LogoImage,
-  alt: 'Logo in navigation for site manage lading page master',
-}
 import { useValidationStore } from '@/stores/validation.ts'
-const validateMail = useValidationStore();
+const validateMail = useValidationStore()
 </script>
 <template>
   <footer class="footer">
@@ -76,7 +73,9 @@ const validateMail = useValidationStore();
       <div class="validation-zone">
         <div class="actions">
           <FooterEmail />
-          <FooterButton class="actions__cta" type="submit" @click="validateMail.validation">Go</FooterButton>
+          <FooterButton class="actions__cta" type="submit" @click="validateMail.validation"
+            >Go</FooterButton
+          >
         </div>
 
         <div class="disclaimers-zone">
@@ -88,7 +87,9 @@ const validateMail = useValidationStore();
       </div>
       <div class="social-media-container">
         <FooterSM :icons="footerSocialMedia" />
-        <Logo :src="logoData.img" :alt="logoData.alt" />
+        <div class="logo-area">
+          <Logo :is-white="isWhite" width="200" height="35" class="logo-area__logo" />
+        </div>
         <p class="social-media-container__description">Copyright 2020. All rights reserved.</p>
       </div>
     </div>
@@ -115,9 +116,13 @@ const validateMail = useValidationStore();
         @include set-gap(1em, 0);
         &__cta {
           box-shadow: none;
+          transition: background-color 0.3s ease-in-out;
+          &:hover {
+            background-color: hsl(12, 97%, 75%);
+          }
         }
       }
-      .description-zone {
+      .disclaimers-zone {
         display: none;
       }
     }
@@ -127,6 +132,10 @@ const validateMail = useValidationStore();
     .social-media-container {
       @include flex-layout($flex-direction: column, $justify-content: center, $align-items: center);
       @include set-gap(0, 3em);
+      .logo-area{
+         @include flex-layout($justify-content: start, $align-items: center);
+        
+      }
     }
   }
 }
@@ -164,9 +173,14 @@ const validateMail = useValidationStore();
         }
       }
       .social-media-container {
-        justify-content: space-between;
+        @include flex-layout($flex-direction: column-reverse, $justify-content: space-between);
         &__description {
           display: none;
+        }
+        .logo-area{
+         display: flex;
+         justify-content: center;
+         align-items: center;
         }
       }
     }

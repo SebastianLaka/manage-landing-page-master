@@ -61,7 +61,7 @@ const props = defineProps<{
     @include set-gap(1em, 1em);
 
     &__description {
-      max-width: 30ch;
+      max-width: 32ch;
     }
   }
 }

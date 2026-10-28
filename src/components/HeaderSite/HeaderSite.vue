@@ -11,8 +11,8 @@ const heroImageData = ref<ImageProps>({
 </script>
 <template>
   <section class="header wrapper">
-    <div class="logo-box">
-      <Image :src="heroImageData.src" :alt="heroImageData.alt" :image-item="heroImageData"/>
+    <div class="image-box">
+      <Image :src="heroImageData.src" :alt="heroImageData.alt" :image-item="heroImageData" class="image-box__image"/>
     </div>
 
     <div class="content">
@@ -37,6 +37,11 @@ const heroImageData = ref<ImageProps>({
 }
 .header {
   padding: 0 1em;
+  .image-box{
+   &__image{
+    z-index: 0;
+   }
+  }
   .content {
     @include flex-layout(
       $flex-direction: column,

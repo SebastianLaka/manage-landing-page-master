@@ -54,7 +54,7 @@ export const useSliderStore = defineStore('slider', () => {
 
   const currentCarousellItem = ref(1)
   const carousellItemsCount = computed(() => sliderItems.value.length)
- 
+  let autoplayInterval: ReturnType<typeof setInterval> | null = null
   const slidePrev = () => {
     if (currentCarousellItem.value > 0) {
       currentCarousellItem.value--
@@ -72,11 +72,27 @@ export const useSliderStore = defineStore('slider', () => {
   const setSlide = (index: number) => {
     currentCarousellItem.value = index
   }
+  const slideAutoplay = (interval: number) => {
+    stopSlideAutoplay()
+    autoplayInterval = setInterval(() => {
+      slideNext()
+    }, interval)
+  }
+
+  const stopSlideAutoplay = () => {
+    if (autoplayInterval) {
+      clearInterval(autoplayInterval)
+      autoplayInterval = null
+    }
+  }
+
   return {
     sliderItems,
     currentCarousellItem,
     slidePrev,
     slideNext,
     setSlide,
+    slideAutoplay,
+    stopSlideAutoplay,
   }
 })

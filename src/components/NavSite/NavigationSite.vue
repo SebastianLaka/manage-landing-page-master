@@ -1,17 +1,14 @@
 <script setup lang="ts">
-import { ref} from 'vue'
+import { ref } from 'vue'
 import { useCounterStore } from '@/stores/counter.ts'
-import LogoImage from '@/components/icons/logo.svg'
 import Logo from '@/components/ReuseableComponents/Logo.vue'
 import IconHamburger from '@/components/icons/icon-hamburger.svg'
 import IconClose from '@/components/icons/icon-close.svg'
 import NavElements from './NavElements.vue'
 import NavButton from '@/components/ReuseableComponents/ButtonSite.vue'
-const store = useCounterStore();
-const logoData = {
-  img: LogoImage,
-  alt: 'Logo in navigation for site manage lading page master',
-}
+const store = useCounterStore()
+const isWhite = ref(false)
+
 const navItems = ref([
   {
     id: 1,
@@ -34,14 +31,14 @@ const navItems = ref([
     title: 'Community',
   },
 ])
-
 </script>
 <template>
   <nav class="nav-site wrapper">
+    <div v-if="!store.isMenuOpen" class="nav-overlay" @click="store.toggleIcon"></div>
     <div class="logo-box">
-      <Logo :src="logoData.img" :alt="logoData.alt" class="logo-box__logo" />
+      <Logo :is-white="isWhite" width="180" height="30" class="logo-box__logo" />
     </div>
-    <NavElements :nav-items="navItems" />
+    <NavElements :nav-items="navItems"  />
     <NavButton class="nav-site__desktop-cta">Get Started</NavButton>
     <NavButton @click="store.toggleIcon" class="nav-site__mobile-nav-button">
       <img
@@ -56,7 +53,7 @@ const navItems = ref([
 @use '@/assets/scss/colors.scss' as *;
 @use '@/assets/scss/breakpoints.scss' as *;
 @use '@/assets/scss/mixins.scss' as *;
-.wrapper{
+.wrapper {
   margin: 0 auto;
   width: 100%;
   max-width: 81.25em;
@@ -65,7 +62,8 @@ const navItems = ref([
   @include flex-layout($justify-content: space-between, $align-items: center);
   padding: 1em;
   position: relative;
-  z-index: 0;
+  z-index: 100;
+  background-color: setColor('gray-50');
   .logo-box {
     @include flex-layout($justify-content: center, $align-items: center);
   }
@@ -80,15 +78,38 @@ const navItems = ref([
     display: none;
   }
 }
+
+@media (min-width: $mobile-view) and (max-width: $desktop-small) {
+  .nav-site {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    .nav-overlay {
+      position: fixed;
+      inset: 7.8% 0 0 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.8) 0%,
+        rgba(0, 0, 0, 0.4) 30%,
+        rgba(0, 0, 0, 0.6) 100%
+      );
+      z-index: 1;
+    }
+  }
+}
 @media (min-width: $desktop-small) {
   .nav-site {
+    .nav-overlay{
+      display: none;
+    }
     &__mobile-nav-button {
       display: none;
     }
     &__desktop-cta {
       display: block;
-      transition: background-color .3s ease-in-out;
-      &:hover{
+      transition: background-color 0.3s ease-in-out;
+      &:hover {
         background-color: hsl(12, 97%, 75%);
       }
     }

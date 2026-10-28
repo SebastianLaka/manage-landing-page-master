@@ -27,7 +27,6 @@ import Footer from './components/Footer/FooterSite.vue'
 body {
   font-family: 'Be Vietnam Pro', sans-serif;
   background-color: setColor('gray-50');
-  overflow-x: hidden;
   .main {
     @include flex-layout($flex-direction: column);
     @include set-gap(0, 6em);

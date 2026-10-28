@@ -28,13 +28,17 @@ const props = defineProps<{
       &--link {
         text-decoration: none;
         color: setColor('gray-500');
+        transition: color 0.3s ease-in-out;
+        &:hover {
+          color: setColor('orange-400');
+        }
       }
     }
   }
 }
 @media (min-width: $desktop-wide) {
- .footer-items {
-  padding-right: 1em;
+  .footer-items {
+    padding-right: 1em;
     @include set-gap(10em, 1em);
   }
 }

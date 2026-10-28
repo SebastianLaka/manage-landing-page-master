@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import BgMobile from '@/components/icons/bg-simplify-section-mobile.svg'
-import BgDesktop from '@/components/icons/bg-simplify-section-desktop.svg'
 import BannerButton from '@/components/ReuseableComponents/ButtonSite.vue'
 </script>
 <template>
@@ -44,6 +42,10 @@ import BannerButton from '@/components/ReuseableComponents/ButtonSite.vue'
         color: setColor('orange-400');
         font-weight: setWeight('bold');
         box-shadow: none;
+        transition: color 0.3s ease-in-out;
+        &:hover {
+          color: hsl(12, 97%, 75%);
+        }
       }
     }
   }
@@ -52,10 +54,10 @@ import BannerButton from '@/components/ReuseableComponents/ButtonSite.vue'
   .site-banner {
     background-image: url('@/components/icons/bg-simplify-section-desktop.svg');
     background-position: center center;
-    .site-banner-container{
+    .site-banner-container {
       flex-direction: row;
       justify-content: space-between;
-      &__header{
+      &__header {
         text-align: left;
         max-width: 20ch;
       }
