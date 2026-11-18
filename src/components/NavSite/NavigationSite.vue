@@ -35,9 +35,9 @@ const navItems = ref([
 <template>
   <nav class="nav-site wrapper">
     <div v-if="!store.isMenuOpen" class="nav-overlay" @click="store.toggleIcon"></div>
-    <div class="logo-box">
+    <a class="logo-box" href="#">
       <Logo :is-white="isWhite" width="180" height="30" class="logo-box__logo" />
-    </div>
+    </a>
     <NavElements :nav-items="navItems"  />
     <NavButton class="nav-site__desktop-cta">Get Started</NavButton>
     <NavButton @click="store.toggleIcon" class="nav-site__mobile-nav-button">

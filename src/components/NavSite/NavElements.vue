@@ -10,13 +10,14 @@ const props = defineProps<{
 }>()
 </script>
 <template>
- 
-    <ul class="nav-items-container" :class="{ 'is-open': !store.isMenuOpen, 'is-desktop': store.isMenuDesktop }">
-      <li v-for="item in navItems" :key="item.id" class="nav-items-container__nav-item">
-        {{ item.title }}
-      </li>
-    </ul>
-  
+  <ul
+    class="nav-items-container"
+    :class="{ 'is-open': !store.isMenuOpen, 'is-desktop': store.isMenuDesktop }"
+  >
+    <li v-for="item in navItems" :key="item.id" class="nav-items-container__nav-item">
+      <a href="#" class="nav-items-container__nav-item--link">{{ item.title }}</a>
+    </li>
+  </ul>
 </template>
 <style lang="scss" scoped>
 @use '@/assets/scss/breakpoints.scss' as *;
@@ -45,34 +46,28 @@ const props = defineProps<{
     &__nav-item {
       padding: 0.25em;
       cursor: pointer;
-      transition: color 0.3s ease-in-out;
-      &:hover {
-        color: setColor('gray-500');
-      }
     }
   }
 }
 
 @media (min-width: $desktop-small) {
   .nav-items-container {
-    // @include flex-layout(
-    //   $flex-direction: row,
-    //   $justify-content: space-between,
-    //   $align-items: center
-    // );
-    &.is-desktop{
+    &.is-desktop {
       @include flex-layout(
-      $flex-direction: row,
-      $justify-content: space-between,
-      $align-items: center
-    );
+        $flex-direction: row,
+        $justify-content: space-between,
+        $align-items: center
+      );
     }
     @include set-gap(1.25em, 0);
     position: static;
     &__nav-item {
-      transition: color 0.3s ease-in-out;
-      &:hover {
-        color: setColor('gray-500');
+      &--link {
+        color: setColor('gray-950');
+        transition: color 0.3s ease-in-out;
+        &:hover {
+          color: setColor('gray-500');
+        }
       }
     }
   }
