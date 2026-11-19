@@ -38,7 +38,7 @@ const navItems = ref([
     <a class="logo-box" href="#">
       <Logo :is-white="isWhite" width="180" height="30" class="logo-box__logo" />
     </a>
-    <NavElements :nav-items="navItems"  />
+    <NavElements :nav-items="navItems" />
     <NavButton class="nav-site__desktop-cta">Get Started</NavButton>
     <NavButton @click="store.toggleIcon" class="nav-site__mobile-nav-button">
       <img
@@ -58,6 +58,7 @@ const navItems = ref([
   width: 100%;
   max-width: 81.25em;
 }
+
 .nav-site {
   @include flex-layout($justify-content: space-between, $align-items: center);
   padding: 1em;
@@ -100,7 +101,7 @@ const navItems = ref([
 }
 @media (min-width: $desktop-small) {
   .nav-site {
-    .nav-overlay{
+    .nav-overlay {
       display: none;
     }
     &__mobile-nav-button {

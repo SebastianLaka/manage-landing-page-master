@@ -1,9 +1,20 @@
 <script setup lang="ts">
-import Layout from './Layout/Layout.vue'
+import { defineAsyncComponent } from 'vue'
+const Layout = defineAsyncComponent(() => import('@/Layout/Layout.vue'))
 </script>
 
 <template>
-<Layout />
+  <Suspense>
+    <template #default>
+      <Layout />
+    </template>
+
+    <template #fallback>
+      <div class="sections-loader">
+        <p>Loding...</p>
+      </div>
+    </template>
+  </Suspense>
 </template>
 
 <style lang="scss">
@@ -13,5 +24,12 @@ import Layout from './Layout/Layout.vue'
 body {
   font-family: 'Be Vietnam Pro', sans-serif;
   background-color: setColor('gray-50');
+  .sections-loader {
+    padding: 5em;
+    text-align: center;
+    font-weight: 500;
+    opacity: 0.7;
+    color: setColor('gray-50');
+  }
 }
 </style>
